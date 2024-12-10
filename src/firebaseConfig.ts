@@ -7,13 +7,14 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_APIKEY,
-  authDomain: import.meta.env.VITE_AUTHDOMAIN,
-  projectId: import.meta.env.VITE_PROJECTID,
-  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGESENDERID,
-  appId: import.meta.env.VITE_APPID
+  apiKey: "AIzaSyDdVOMK7B1fPrNw4z0Or384GA8b4vYZyVU",
+  authDomain: "social-media-app-22a95.firebaseapp.com",
+  projectId: "social-media-app-22a95",
+  storageBucket: "social-media-app-22a95.firebasestorage.app",
+  messagingSenderId: "876424131059",
+  appId: "1:876424131059:web:de30521af679b151ec6286"
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

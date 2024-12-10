@@ -9,4 +9,5 @@ export { default as img8 } from '../assets/img8.svg';
 export { default as img9 } from '../assets/img9.svg';
 export { default as icon } from '../assets/icon.svg';
 export {default as Google_svg} from '../assets/Google_svg.svg'
+export {default as Profile_img} from '../assets/Profile_img.svg'
  

@@ -1,15 +1,46 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import {UserLogIn} from '../../Types'
+import { useUserAuth } from "../../context/UserAuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
-interface LoginProps {}
+interface ILoginProps {}
+const initialValue: UserLogIn = {
+   email: "",
+   password: "",
+ };
 
-const Login: React.FC<LoginProps> = () => {
+const Login: React.FC<ILoginProps> = (props) => {
+   const {  signIn, resetPassword } = useUserAuth();
+   const navigate = useNavigate();
+   const [userLogInInfo, setuserLogInInfo] =
+   React.useState<UserLogIn>(initialValue);
+
+   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      try {
+        console.log("The user info is : ", userLogInInfo);
+        await signIn(userLogInInfo.email, userLogInInfo.password);
+        navigate("/");
+      } catch (error) {
+        console.log("Error : ", error);
+      }
+    };
+
+    const handleForgetPassword: React.MouseEventHandler = () => {
+      try {
+        resetPassword(userLogInInfo.email);
+      } catch (error) {
+        console.log("Error : ", error);
+      }
+    }
+   
+
   return (
-    <div className="flex items-center justify-center min-h-screen ml-4 mr-4 bg-gray-100">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+    <div className="flex items-center justify-center min-h-screen ml-4 mr-4 ">
+      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg border">
         <h1 className="text-2xl font-semibold text-center mb-6">Login</h1>
 
-        <form>
+        <form onSubmit={handleSubmit}>
         
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -19,6 +50,13 @@ const Login: React.FC<LoginProps> = () => {
               type="email"
               id="email"
               placeholder="Enter your email"
+              value={userLogInInfo.email}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setuserLogInInfo({
+                  ...userLogInInfo,
+                  email: e.target.value,
+                })
+              }
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
@@ -32,6 +70,13 @@ const Login: React.FC<LoginProps> = () => {
             <input
               type="password"
               id="password"
+              value={userLogInInfo.password}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setuserLogInInfo({
+                  ...userLogInInfo,
+                  password: e.target.value,
+                })
+              }
               placeholder="Enter your password"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
@@ -39,12 +84,12 @@ const Login: React.FC<LoginProps> = () => {
           </div>
  
           <div className="mb-4 text-right">
-            <a
-              href="#"
+            <button 
+              onClick={handleForgetPassword}
               className="text-sm text-blue-500 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               Forgot Password?
-            </a>
+            </button>
           </div>
 
          
