@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@uploadcare/blocks": "0.50.4",
+    "@uploadcare/file-uploader": "^1.11.1",
+    "@uploadcare/react-uploader": "^1.3.0",
     "firebase": "^11.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

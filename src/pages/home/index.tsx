@@ -21,7 +21,13 @@ const Home: React.FC<HomeProps> = () => {
     <div>
         <div className='flex justify-between'>
       <div className='flex m-[16px] h-[50px]   items-center'>
-          <img src={Profile_img} alt=""className='h-full'/>
+        <div className='h-[50px] w-[50px]'>
+      <img 
+  src={user?.photoURL === null ? Profile_img : user?.photoURL} 
+  alt="Profile"
+  className="h-full w-full rounded-full object-cover"
+/></div>
+
         <div className='flex flex-col ml-[10px]'>
          <span className=' text-[10px] text-gray-400'>Welcome Back,</span>
          <span className='font-semibold'>{user?.displayName === null ? "New User" : user?.displayName }</span>
