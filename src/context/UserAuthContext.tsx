@@ -27,7 +27,7 @@ const signUp = (email: string, password: string) =>{
 
 const logOut=()=>{
     signOut(auth).then(() => {
-        alert("Sign-out successful."); // Sign-out successful.
+        alert("Sign-out successful.");  
         <Navigate to="/login"/>
       }).catch((error) => {
         console.log(error);

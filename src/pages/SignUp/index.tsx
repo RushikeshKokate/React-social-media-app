@@ -22,6 +22,7 @@ const Signup: React.FC<Signupprops> = (props) => {
   React.useState<UserSignUp>(initialValue);
   const {  signUp } = useUserAuth();
   const navigate = useNavigate();
+  
 
   const handleSubmit = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ const Signup: React.FC<Signupprops> = (props) => {
       navigate("/");
     } catch (error) {
       console.log("Error : ", error);
+      alert(`Error: ${(error as any)?.message}`);
     }
   };
 

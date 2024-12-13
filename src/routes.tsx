@@ -28,11 +28,6 @@ import MainPage from "./pages/MainPage";
                 element: <Profile/>,
                 errorElement: <Error/>,
             },
-            {
-                path: '/MyPhotos',
-                element: <MyPhoto/>,
-                errorElement: <Error/>,   
-            }
          ]
     },
     {

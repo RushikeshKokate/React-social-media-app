@@ -1,5 +1,5 @@
 import { db } from "../firebaseConfig";
-import { Post } from "../Types";
+import { DocumentResponse, Post } from "../Types";
 import {
   addDoc,
   collection,
@@ -18,9 +18,28 @@ export const createPost = (post: Post) => {
   return addDoc(collection(db, COLLECTION_NAME), post);
 };
 
-export const getPosts = () => {
+export const getPosts = async() => {
+  try{
   const q = query(collection(db, COLLECTION_NAME), orderBy("date", "desc"));
-  return getDocs(q);
+   const querSnapshot = await getDocs(q);
+   const tempArr : DocumentResponse[] = [];
+   if(querSnapshot.size > 0){
+       querSnapshot.forEach((doc)=>{
+         const data = doc.data() as Post;
+         const responseObj : DocumentResponse = {
+           id:doc.id,
+           ...data
+         }
+         tempArr.push(responseObj)
+       })
+       return tempArr;
+   }else{
+    console.log("no such document");
+    
+   }}catch(error){
+     console.log(error);
+     
+   }
 };
 
 export const getPostByUserId = (id: string) => {

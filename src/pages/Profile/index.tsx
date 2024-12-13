@@ -2,20 +2,32 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { Cover_img, Vector, Profile_img } from "../../assets/index";
 import { UserAuthContext } from "../../context/UserAuthContext";
+import MyPhoto from "../myPhotos";
+import { IoMdAdd } from "react-icons/io";
+import { FaRegUserCircle } from "react-icons/fa";
 
 interface ProfileProps {}
 
 const Profile: React.FC<ProfileProps> = () => {
   const { user } = React.useContext(UserAuthContext);
+  const [profileIMG, setProfileIMG] = React.useState("")
   const navigate = useNavigate();
 
   const handleBack = () => {
     navigate(-1);
   };
 
+  React.useEffect(()=>{
+    if(user?.photoURL){
+      setProfileIMG(user?.photoURL)
+    }
+    else{
+      setProfileIMG("")
+    }
+  },[])
+
   return (
     <div className="relative">
-       
       <img
         src={Cover_img}
         alt="Cover"
@@ -26,20 +38,19 @@ const Profile: React.FC<ProfileProps> = () => {
       </button>
       <div className="mt-[24px] lg:mt-[60px] absolute left-7 right-6 h-auto">
         <span className="font-karla font-[800] text-[24px] w-full ">
-          {user?.displayName ? user?.displayName : "New User"}
+          {user?.displayName ? user?.displayName : "Guest User"}
         </span>
         <p className="leading-[17px] font-kumbh font-[400] mt-[6px] text-[14px]">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
         </p>
         <div className="mt-[24px]">
-        <span className=" font-karla font-[600] text-[18px]">
-          My Post
-        </span>
+          <span className=" font-karla font-[600] text-[18px]">My Post</span>
+          <div className="mt-4">
+            <MyPhoto />
+          </div>
         </div>
-        
       </div>
 
-      
       <div className="absolute left-8 sm:left-10 md:left-14 lg:left-16 top-[calc(20vh-56px)] sm:top-[calc(25vh-60px)] md:top-[calc(30vh-75px)] lg:top-[calc(35vh-90px)] w-[112px] sm:w-[120px] md:w-[150px] lg:w-[180px] h-[112px] sm:h-[120px] md:h-[150px] lg:h-[180px] rounded-full bg-white shadow-lg border-2 border-gray-200">
         <img
           src={user?.photoURL === null ? Profile_img : user?.photoURL}
@@ -58,6 +69,12 @@ const Profile: React.FC<ProfileProps> = () => {
           alt="Back"
           className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8"
         />
+      </button>
+      <button 
+        className='h-12 w-12 rounded-full bg-black flex justify-center items-center fixed bottom-4 right-4 z-50'
+        onClick={() => navigate("/post")}
+      >
+        <IoMdAdd color='white' size={20} />
       </button>
     </div>
   );

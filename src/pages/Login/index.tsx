@@ -23,6 +23,7 @@ const Login: React.FC<ILoginProps> = (props) => {
         navigate("/");
       } catch (error) {
         console.log("Error : ", error);
+        alert(`Error: ${(error as any)?.message}`);
       }
     };
 
@@ -51,6 +52,7 @@ const Login: React.FC<ILoginProps> = (props) => {
               id="email"
               placeholder="Enter your email"
               value={userLogInInfo.email}
+              
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setuserLogInInfo({
                   ...userLogInInfo,

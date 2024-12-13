@@ -18,6 +18,7 @@ export interface FileEntry {
 export interface Post {
     caption : string,
     photos : PhotoMeta[],
+    videos: VideoMeta[],
     likes : number,
     userlikes : [],
     userId : string | null,
@@ -27,4 +28,19 @@ export interface Post {
 export interface PhotoMeta {
     cdnUrl: string;
     uuid: string;
+  }
+  
+  export interface VideoMeta {
+    cdnUrl: string;
+    uuid: string;
+}
+  export interface DocumentResponse {
+    id: string,
+    caption : string,
+    photos : PhotoMeta[],
+    videos: VideoMeta[],
+    likes : number,
+    userlikes : [],
+    userId : string | null,
+    date: Date
   }
